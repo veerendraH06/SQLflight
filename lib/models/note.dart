@@ -1,22 +1,28 @@
-class Note
-{
+
+class Note {
   int id;
-  String title;
-  String description;
+  String name;
+  String age;
+
+  Note(this.id, this.name,this.age);
+
+  int get _id =>id;
+  String get _title =>_title;
+  String get _description =>_description;
 
 
-  Note(this.id,this.title,this.description);
-  // Note.withoutID(this.title,this.Description);
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{
+      'id': id,
+      'name': name,
+      'age':age,
+    };
+    return map;
+  }
 
-int get _id => id;
-
-String get _title => title;
-
-String get _description => description;
-
-
-set _title(String newtitle){
-  this.title =newtitle;
-}
-
+  Note.fromMap(Map<String, dynamic> map) {
+    id = map['id'];
+    name = map['name'];
+    age = map['age'];
+  }
 }

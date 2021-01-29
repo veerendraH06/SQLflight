@@ -7,250 +7,287 @@ class MyDataPage extends StatelessWidget {
   final name_c = TextEditingController();
   final age_c = TextEditingController();
   final id_c = TextEditingController();
+  String name;
+  String age;
+  int id;
+  // final fromKey =new GlobalKey<FromState>();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Sqlight'),
+          title: Text('Sqflight'),
+          centerTitle: true,
         ),
-        body: Center(
+   backgroundColor: Colors.blueGrey,
+   body:Padding(
+
+     padding: EdgeInsets.only(top: 30),
+       child:Container(
+
+            height: MediaQuery.of(context).size.height ,
+            width: MediaQuery.of(context).size.width ,
             child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
                             BorderSide(color: Colors.black, width: 0.1.w)),
-                    contentPadding:
+                        contentPadding:
                         EdgeInsets.fromLTRB(3.0.w, 3.0.w, 3.0.h, 3.0.h),
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintText: "Name",
-                    hintStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0.w)),
-                  ),
-                  controller: name_c,
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.010),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: TextField(
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black, width: 0.1.w)),
-                    contentPadding:
-                        EdgeInsets.fromLTRB(3.0.w, 3.0.w, 3.0.h, 3.0.h),
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintText: "Age",
-                    hintStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0.w)),
-                  ),
-                  controller: age_c,
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.29,
-                child: RaisedButton(
-                  onPressed: () {
-                    _insert();
-                  },
-                  color: Colors.green,
-                  child: Text(
-                    "Insert",
-                  ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.29,
-                child: RaisedButton(
-                  onPressed: () {
-                    _delete();
-                    return showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        backgroundColor: Colors.teal,
-                        title: Text(
-                          "Alert ",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontStyle: FontStyle.italic),
-                        ),
-                        content: TextField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black, width: 0.1.w)),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(3.0.w, 3.0.w, 3.0.h, 3.0.h),
-                            labelStyle: TextStyle(color: Colors.black),
-                            hintText: "Id",
-                            hintStyle: TextStyle(color: Colors.black),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0.w)),
-                          ),
-                          controller: id_c,
-                        ),
-                        actions: <Widget>[
-                          FlatButton(
-                            onPressed: () {
-                              _delete();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MyDataPage()));
-                            },
-                            child: Text(
-                              "okay",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.black),
-                            ),
-                          ),
-                        ],
+                        labelStyle: TextStyle(color: Colors.black),
+                        hintText: "Name",
+                        hintStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0.w)),
                       ),
-                    );
-                  },
-                  color: Colors.red,
-                  child: Text(
-                    "Delete",
+                      controller: name_c,
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.29,
-                child: RaisedButton(
-                  onPressed: () {
-                    _query();
-                  },
-                  color: Colors.green,
-                  child: Text(
-                    "Query",
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.020),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextField(
+                      style: TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.black, width: 0.1.w)),
+                        contentPadding:
+                        EdgeInsets.fromLTRB(3.0.w, 3.0.w, 3.0.h, 3.0.h),
+                        labelStyle: TextStyle(color: Colors.black),
+                        hintText: "Age",
+                        hintStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0.w)),
+                      ),
+                      controller: age_c,
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.29,
-                child: RaisedButton(
-                  onPressed: () {
-                    return showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: Text("Input"),
-                        content: Container(
-                          child:  ListView(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    child: TextField(
-                                      decoration: new InputDecoration(
-                                        labelText: 'Enter Id',
-                                        border: new OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(
-                                            const Radius.circular(10.0),
-                                          ),
-                                          borderSide: new BorderSide(
-                                            color: Colors.black,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                      ),
-                                      controller: id_c,
-                                    ),
-                                    width: 190,
-                                    height: 60.0,
-                                    padding: const EdgeInsets.all(10),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    child: TextField(
-                                      decoration: new InputDecoration(
-                                        labelText: 'Enter Name',
-                                        border: new OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(
-                                            const Radius.circular(10.0),
-                                          ),
-                                          borderSide: new BorderSide(
-                                            color: Colors.black,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                      ),
-                                      controller: name_c,
-                                    ),
-                                    width: 190,
-                                    height: 60.0,
-                                    padding: const EdgeInsets.all(10),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    child: TextField(
-                                      decoration: new InputDecoration(
-                                        labelText: 'Enter Age',
-                                        border: new OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(
-                                            const Radius.circular(10.0),
-                                          ),
-                                          borderSide: new BorderSide(
-                                            color: Colors.black,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                      ),
-                                      controller: age_c,
-                                    ),
-                                    width: 190,
-                                    height: 60.0,
-                                    padding: const EdgeInsets.all(10),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          height: 200,
-                          width: 200,
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.030),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      child: RaisedButton(
+                        onPressed: () {
+                          _insert();
+                        },
+                        color: Colors.green,
+                        child: Text(
+                          "Insert",
                         ),
-                        actions: <Widget>[
-                          FlatButton(
-                            onPressed: () {
-                              _update();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyDataPage(),
+                      ),
+                    ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.29,
+                        child: RaisedButton(
+                          onPressed: () {
+                            _delete();
+                            return showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                backgroundColor: Colors.teal,
+                                title: Text(
+                                  "Alert ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30,
+                                      fontStyle: FontStyle.italic),
                                 ),
-                              );
-                            },
-                            child: Text("Update"),
+                                content: TextField(
+                                  style: TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 0.1.w)),
+                                    contentPadding:
+                                    EdgeInsets.fromLTRB(3.0.w, 3.0.w, 3.0.h, 3.0.h),
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    hintText: "Id",
+                                    hintStyle: TextStyle(color: Colors.black),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0.w)),
+                                  ),
+                                  controller: id_c,
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      _delete();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  MyDataPage()));
+                                    },
+                                    child: Text(
+                                      "okay",
+                                      style:
+                                      TextStyle(fontSize: 20, color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          color: Colors.red,
+                          child: Text(
+                            "Delete",
                           ),
-                        ],
+                        ),
+                      )],),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.020),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [Container(
+                      width: MediaQuery.of(context).size.width * 0.29,
+                      child: RaisedButton(
+                        onPressed: () {
+                          _query();
+                        },
+                        color: Colors.green,
+                        child: Text(
+                          "Query",
+                        ),
                       ),
-                    );
-                  },
-                  color: Colors.red,
-                  child: Text(
-                    "Update",
+                    ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.29,
+                        child: RaisedButton(
+                          onPressed: () {
+                            return showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                backgroundColor: Colors.teal,
+                                title: Text("Input"),
+                                content: Container(
+                                  child:  ListView(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: TextField(
+                                              decoration: new InputDecoration(
+                                                labelText: 'Enter Id',
+                                                border: new OutlineInputBorder(
+                                                  borderRadius: const BorderRadius.all(
+                                                    const Radius.circular(10.0),
+                                                  ),
+                                                  borderSide: new BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                              ),
+                                              controller: id_c,
+                                            ),
+                                            width: 190,
+                                            height: 60.0,
+                                            padding: const EdgeInsets.all(10),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: TextField(
+                                              decoration: new InputDecoration(
+                                                labelText: 'Enter Name',
+                                                border: new OutlineInputBorder(
+                                                  borderRadius: const BorderRadius.all(
+                                                    const Radius.circular(10.0),
+                                                  ),
+                                                  borderSide: new BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                fillColor: Colors.white,
+                                              ),
+                                              controller: name_c,
+                                            ),
+                                            width: 190,
+                                            height: 60.0,
+                                            padding: const EdgeInsets.all(10),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: TextField(
+                                              decoration: new InputDecoration(
+                                                labelText: 'Enter Age',
+                                                border: new OutlineInputBorder(
+                                                  borderRadius: const BorderRadius.all(
+                                                    const Radius.circular(10.0),
+                                                  ),
+                                                  borderSide: new BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                              ),
+                                              controller: age_c,
+                                            ),
+                                            width: 190,
+                                            height: 60.0,
+                                            padding: const EdgeInsets.all(10),
+                                          ),
+                                        ],
+                                      ),
+                                      // Container(
+                                      //   child: ListView.builder( itemCount: ),
+                                      //
+                                      // ),
+                                    ],
+                                  ),
+                                  height: 200,
+                                  width: 200,
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      _update();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MyDataPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text("Update"),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          color: Colors.red,
+                          child: Text(
+                            "Update",
+                          ),
+                        ),
+                      ),
+
+                    ],
                   ),
-                ),
-              ),
-            ])));
+                ]
+
+             )
+             )
+             ),
+
+      );
   }
+
+
 
   void _insert() async {
     Map<String, dynamic> row = {
@@ -269,9 +306,9 @@ class MyDataPage extends StatelessWidget {
 
   void _update() async {
     Map<String, dynamic> row = {
-      DatabaseHelper.columnId: int.parse(id_c.text),
-      DatabaseHelper.columnName: name_c.text,
-      DatabaseHelper.columnAge: age_c.text,
+      DatabaseHelper.columnId: int.parse('${this.id_c.text}'),
+      DatabaseHelper.columnName:'${this.name_c.text}',
+      DatabaseHelper.columnAge:'${this.age_c.text}',
     };
     final rowAffected = await dbHelper.update(row);
     print('updated $rowAffected row(s)');
@@ -286,3 +323,5 @@ class MyDataPage extends StatelessWidget {
     print('deleted $rowsDeleted row(s).row $row');
   }
 }
+
+

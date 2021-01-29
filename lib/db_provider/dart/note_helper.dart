@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sql_information/models/note.dart';
 
 class DatabaseHelper{
 
@@ -57,6 +58,7 @@ class DatabaseHelper{
 // data Storing values in MAP structure it will store the values in Kye and value pair
   Future<List<Map<String, dynamic>>> queryAllRows() async{
     Database db =await instance.database;
+
     return await db.query(table);
   }
  /////this query showing how may datas stored in my table
@@ -66,6 +68,19 @@ class DatabaseHelper{
     return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*)FROM $table'));
 
   }
+  Future<List<Note>> getEmployees() async {
+    var dbClient = await instance.database;
+    List<Map> maps = await dbClient.query(table, columns: [columnId, columnName,columnAge]);
+    //List<Map> maps = await dbClient.rawQuery("SELECT * FROM $TABLE");
+    List<Note> employees = [];
+    if (maps.length > 0) {
+      for (int i = 0; i < maps.length; i++) {
+        employees.add(Note.fromMap(maps[i]));
+      }
+    }
+    return employees;
+  }
+
   ///// this Query update / modify my table
 
   Future<int> update(Map<String, dynamic> row)async{
@@ -83,4 +98,8 @@ class DatabaseHelper{
     return await db.delete(table, where:'$columnId=?', whereArgs:[id]);
   }
 
+
+
+
 }
+
